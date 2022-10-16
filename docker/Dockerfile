@@ -10,10 +10,13 @@ RUN  apt-get update &&  apt-get install -y build-essential verilator \
         $additional_deps \
         graphviz libomp-dev libsuitesparse-dev \
         libigraph-dev
+RUN useradd -ms /bin/bash hal
+WORKDIR /home/hal
+USER hal
 RUN git clone https://github.com/emsec/hal.git
-WORKDIR /hal/
-RUN mkdir build && cd build
-WORKDIR /hal/build
-RUN ls && pwd
+WORKDIR /home/hal/hal
+RUN mkdir build
+WORKDIR /home/hal/hal/build
 RUN cmake ..
 RUN make -j $(nproc)
+CMD bin/hal -g
