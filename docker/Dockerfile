@@ -7,7 +7,6 @@ RUN  apt-get update &&  apt-get install -y build-essential verilator \
         libqt5svg5-dev libqt5svg5* ninja-build lcov gcovr python3-sphinx \
         doxygen python3-sphinx-rtd-theme python3-jedi python3-pip \
         pybind11-dev python3-pybind11 rapidjson-dev libspdlog-dev libz3-dev libreadline-dev \
-        $additional_deps \
         graphviz libomp-dev libsuitesparse-dev \
         libigraph-dev
 RUN useradd -ms /bin/bash hal
@@ -19,4 +18,4 @@ RUN mkdir build
 WORKDIR /home/hal/hal/build
 RUN cmake ..
 RUN make -j $(nproc)
-CMD bin/hal -g
+CMD ./bin/hal -g
